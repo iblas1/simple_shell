@@ -23,7 +23,7 @@ int start_shell(char **env, char **argv)
 		char_count = my_getline(&buffer, &char_size, stdin);
 		exit_with_ctrl_D(char_count, buffer);
 
-		buffer_copy = strdup(buffer);
+		buffer_copy = _strdup(buffer);
 		argc = 0;
 		token = my_strtok(buffer_copy, delim);
 		while (token)
@@ -39,7 +39,7 @@ int start_shell(char **env, char **argv)
 			continue;
 		}
 		special_cmd(argv_copy, buffer, buffer_copy, env);
-		if (strcmp(argv_copy[0], "cd") == 0)
+		if (_strcmp(argv_copy[0], "cd") == 0)
 		{
 			cd_cmd(argc, argv_copy);
 			continue;

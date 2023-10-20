@@ -32,7 +32,7 @@ char *m_environ()
 
 	while (environ[count] != NULL)
 	{
-		if (strncmp(environ[count], "PATH=", 5) == 0)
+		if (_strncmp(environ[count], "PATH=", 5) == 0)
 		{
 			return (environ[count]);
 		}

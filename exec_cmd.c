@@ -21,20 +21,20 @@ void exit_cmd(char *buffer, char *buffer_copy)
 
 void cd_cmd(int argc, char **argv)
 {
-	char new_pwdir[1024];
+	char current_route[1024];
 
-	if (argc == 1 || strcmp(argv[1], "~") == 0)
+	if (argc == 1 || _strcmp(argv[1], "~") == 0)
 		chdir(getenv("HOME"));
 
-	else if (strcmp(argv[1], "-") == 0)
+	else if (_strcmp(argv[1], "-") == 0)
 	{
-		char *prev_dir = getenv("OLDPWD");
+		char *prev_route = getenv("OLDPWD");
 
-		if (prev_dir == NULL)
+		if (prev_route == NULL)
 	{
 			print_error("cd: no previous directory");
 		} else
-			chdir(prev_dir);
+			chdir(prev_route);
 	}
 	else
 	{
@@ -43,9 +43,9 @@ void cd_cmd(int argc, char **argv)
 
 	}
 
-	getcwd(new_pwdir, sizeof(new_pwdir));
-	setenv("PWD", new_pwdir, 1);
-	setenv("OLDPWD", new_pwdir, 1);
+	getcwd(current_route, sizeof(current_route));
+	setenv("PWD", current_route, 1);
+	setenv("OLDPWD", current_route, 1);
 }
 
 /**
@@ -55,11 +55,12 @@ void cd_cmd(int argc, char **argv)
 
 void print_env(char **env)
 {
-			while (*env)
-			{
-				print_string(*env);
-				print_string("\n");
-				env++;
-			}
+		int count;
+		(void)env;
+		for (count = 0; environ[count] != NULL; count++)
+		{
+			print_string(environ[count]);
+			print_string("\n");
+		}
 }
 
