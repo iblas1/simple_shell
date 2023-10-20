@@ -1,6 +1,6 @@
 #include "main.h"
 
-
+int start_shell(char **env, char **argv);
 /**
  * start_shell - main shell command
  * @env: env variables
@@ -44,13 +44,13 @@ int start_shell(char **env, char **argv)
 			free(buffer_copy);
 			continue;
 		}
-		execmd(argv_copy[0], argv_copy);
 		special_cmd(argv_copy, buf, buffer_copy, env);
 		if (_strcmp(argv_copy[0], "cd") == 0)
 		{
 			cd_cmd(argc, argv_copy);
 			continue;
 		}
+		execmd(argv_copy[0], argv_copy);
 		free(buffer_copy);
 	}
 	free(buf);
