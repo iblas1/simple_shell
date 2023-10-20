@@ -13,17 +13,23 @@ int start_shell(char **env, char **argv)
 	int argc = 0;
 	ssize_t char_count;
 	size_t char_size = 0;
-	char *buffer = NULL, *buffer_copy, *token, *delim = " \n";
+	char *buf = NULL, *buffer_copy, *token, *delim = " \n";
 	char *argv_copy[MAX_INPUT_LENGTH];
 	(void)argv;
 
 	while (true)
 	{
 		show_shell_name();
-		char_count = my_getline(&buffer, &char_size, stdin);
-		exit_with_ctrl_D(char_count, buffer);
+		char_count = my_getline(&buf, &char_size, stdin);
+		exit_with_ctrl_D(char_count, buf);
 
-		buffer_copy = _strdup(buffer);
+		while (buf[argc])
+		{
+			if (buf[argc] == '\n')
+				buf[argc] = 0;
+			argc++;
+		}
+		buffer_copy = _strdup(buf);
 		argc = 0;
 		token = my_strtok(buffer_copy, delim);
 		while (token)
@@ -38,15 +44,15 @@ int start_shell(char **env, char **argv)
 			free(buffer_copy);
 			continue;
 		}
-		special_cmd(argv_copy, buffer, buffer_copy, env);
+		execmd(argv_copy[0], argv_copy);
+		special_cmd(argv_copy, buf, buffer_copy, env);
 		if (_strcmp(argv_copy[0], "cd") == 0)
 		{
 			cd_cmd(argc, argv_copy);
 			continue;
 		}
-		execmd(argv_copy[0], argv_copy);
 		free(buffer_copy);
 	}
-	free(buffer);
+	free(buf);
 }
 
