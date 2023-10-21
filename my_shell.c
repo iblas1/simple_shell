@@ -44,6 +44,7 @@ int start_shell(char **env, char **argv)
 			free(buffer_copy);
 			continue;
 		}
+
 		special_cmd(argv_copy, buf, buffer_copy, env);
 		if (_strcmp(argv_copy[0], "cd") == 0)
 		{

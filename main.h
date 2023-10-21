@@ -35,6 +35,7 @@ void special_cmd(char **argv_c, char *buf, char *buf_cpy, char **env);
 void exit_with_ctrl_D(ssize_t char_count, char *buffer);
 ssize_t my_getline(char **buffer, size_t *buffer_size, FILE *input);
 char *path_process(char *path, char *command);
+void my_setenv(char *tokens, char **args);
 
 int _strncmp(char *str1, char *str2, size_t n);
 int _strcmp(char *s1, char *s2);

@@ -26,15 +26,15 @@ int execmd(char *cmd, char **args)
 		if (main_cmd == NULL)
 		{
 			if (isatty(0))
-			fprintf(stderr, "hsh: command not found: %s\n", cmd);
+			fprintf(stderr, "./hsh: command not found: %s\n", cmd);
 			else
-			fprintf(stderr, "hsh: 1: %s: not found\n", cmd);
+			fprintf(stderr, "./hsh: 1: %s: not found\n", cmd);
 			exit(1);
 		}
 		route_return = execve(main_cmd, args, NULL);
 		if (route_return == -1)
 		{
-			fprintf(stderr, "hsh: command not found: %s\n", cmd);
+			fprintf(stderr, "./hsh: command not found: %s\n", cmd);
 			exit(1);
 		}
 		exit(EXIT_FAILURE);
