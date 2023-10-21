@@ -36,6 +36,11 @@ int start_shell(char **env, char **argv)
 		token = my_strtok(buffer_copy, delim);
 		while (token)
 		{
+			if (token[0] == '#')
+			{
+				argv_copy[argc] = NULL;
+				break;
+			}
 			argv_copy[argc] = token;
 			token = my_strtok(NULL, delim);
 			argc++;
@@ -56,7 +61,7 @@ int start_shell(char **env, char **argv)
 			continue;
 		}
 		execmd(argv_copy[0], argv_copy);
-	/*	free(buffer_copy);*/
+		/*	free(buffer_copy);*/
 	}
 	free(buf);
 }
