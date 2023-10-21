@@ -48,6 +48,8 @@ int start_shell(char **env, char **argv)
 		}
 
 		special_cmd(argv_copy, buf, buffer_copy, env);
+		if (strcmp(argv_copy[0], "env") == 0)
+			continue;
 		if (_strcmp(argv_copy[0], "cd") == 0)
 		{
 			cd_cmd(argc, argv_copy);
