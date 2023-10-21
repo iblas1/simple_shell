@@ -55,11 +55,13 @@ void cd_cmd(int argc, char **argv)
 
 void print_env(char **env)
 {
-	while (*env)
+	int i = 0;
+
+	while (env[i])
 	{
 	print_string(*env);
-	print_string("\n");
-	env++;
+	write(1, "\n", 1);
+	i++;
 	}
 }
 
