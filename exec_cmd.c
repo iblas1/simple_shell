@@ -59,7 +59,7 @@ void print_env(char **env)
 
 	while (env[i])
 	{
-	print_string(*env);
+	print_string(env[i]);
 	write(1, "\n", 1);
 	i++;
 	}
