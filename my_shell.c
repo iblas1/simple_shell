@@ -20,7 +20,7 @@ int start_shell(char **env, char **argv)
 	while (true)
 	{
 		show_shell_name();
-		char_count = getline(&buf, &char_size, stdin);
+		char_count = my_getline(&buf, &char_size, stdin);
 		exit_with_ctrl_D(char_count, buf);
 
 		while (buf[argc])
